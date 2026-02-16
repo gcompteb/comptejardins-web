@@ -157,15 +157,66 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
+    function updateScrollDots(container, dots) {
+        const items = container.children;
+        const containerRect = container.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
+        
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+        
+        Array.from(items).forEach((item, index) => {
+            const itemRect = item.getBoundingClientRect();
+            const itemCenter = itemRect.left + itemRect.width / 2;
+            const distance = Math.abs(containerCenter - itemCenter);
+            
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+        
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === closestIndex);
+        });
+    }
+
     document.querySelectorAll('.features-grid, .serveis-grid').forEach(container => {
-        const hint = container.parentElement.querySelector('.swipe-hint');
-        if (hint) {
-            container.addEventListener('scroll', function() {
-                if (this.scrollLeft > 20) {
-                    hint.style.opacity = '0';
-                    setTimeout(() => hint.style.display = 'none', 300);
-                }
-            }, { once: true });
+        const dotsContainer = container.parentElement.querySelector('.scroll-dots');
+        if (dotsContainer) {
+            const dots = dotsContainer.querySelectorAll('.scroll-dot');
+            updateScrollDots(container, dots);
+            container.addEventListener('scroll', () => updateScrollDots(container, dots));
         }
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    document.querySelectorAll('.slide img').forEach(img => {
+        img.addEventListener('click', () => {
+            const slide = img.closest('.slide');
+            const caption = slide.querySelector('.slide-caption h3');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightboxCaption.textContent = caption ? caption.textContent : '';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
     });
 });
