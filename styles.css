@@ -415,6 +415,35 @@ a {
     font-size: 1.1rem;
 }
 
+.swipe-hint {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-top: 15px;
+    transition: opacity 0.3s ease;
+}
+
+.swipe-hint svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--color-text-light);
+    animation: swipeHint 1.5s ease-in-out infinite;
+}
+
+@keyframes swipeHint {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+@media (max-width: 768px) {
+    .swipe-hint {
+        display: flex;
+    }
+}
+
 .serveis {
     padding: 100px 0;
     background: var(--color-bg);
@@ -1013,12 +1042,53 @@ a {
         transform: rotate(-45deg) translate(5px, -5px);
     }
     
+    .features {
+        padding: 50px 0;
+    }
+    
     .features-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 15px;
+        padding: 10px 20px 20px;
+        margin: 0 -20px;
+    }
+    
+    .features-grid::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .feature {
+        flex: 0 0 75%;
+        scroll-snap-align: center;
+        background: var(--color-bg-alt);
+        border-radius: var(--radius-md);
+        padding: 25px 20px;
+    }
+    
+    .serveis {
+        padding: 60px 0;
     }
     
     .serveis-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 15px;
+        padding: 10px 20px 20px;
+        margin: 0 -20px;
+    }
+    
+    .serveis-grid::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .servei-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
     }
     
     .slide img {
@@ -1033,6 +1103,10 @@ a {
         right: 10px;
     }
     
+    .sobre {
+        padding: 60px 0;
+    }
+    
     .sobre-content {
         grid-template-columns: 1fr;
         gap: 60px;
@@ -1045,25 +1119,72 @@ a {
     }
     
     .sobre-stats {
-        justify-content: center;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        padding-bottom: 10px;
+    }
+    
+    .sobre-stats::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .stat {
+        flex: 0 0 auto;
+        scroll-snap-align: center;
+        min-width: 100px;
+    }
+    
+    .contacte {
+        padding: 60px 0;
     }
     
     .contacte-wrapper {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 40px;
     }
     
     .contacte-form {
         padding: 30px;
     }
     
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
     .footer-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-bottom: 25px;
         text-align: center;
+    }
+    
+    .footer-brand {
+        grid-column: span 2;
     }
     
     .footer-brand p {
         margin: 0 auto;
+    }
+    
+    .footer-links h4,
+    .footer-contact h4 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+    
+    .footer-links a,
+    .footer-contact a,
+    .footer-contact p {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+    
+    .sobre-image img {
+        max-height: 280px;
+        width: 100%;
+        object-fit: cover;
     }
 }
 
@@ -1075,6 +1196,14 @@ a {
     
     .btn {
         width: 100%;
+    }
+    
+    .feature {
+        flex: 0 0 85%;
+    }
+    
+    .servei-card {
+        flex: 0 0 90%;
     }
     
     .slide img {
@@ -1102,8 +1231,30 @@ a {
         grid-column: span 1;
     }
     
-    .sobre-stats {
-        flex-direction: column;
-        gap: 25px;
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .footer-brand {
+        grid-column: span 1;
+    }
+    
+    .footer-links:nth-child(3) {
+        display: none;
+    }
+    
+    .sobre-image img {
+        max-height: 220px;
+    }
+    
+    .sobre-badge {
+        bottom: -15px;
+        right: 10px;
+        padding: 15px 18px;
+    }
+    
+    .badge-number {
+        font-size: 1.5rem;
     }
 }

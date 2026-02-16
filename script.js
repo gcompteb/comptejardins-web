@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
-        }   
+        }
     });
 
     menuToggle.addEventListener('click', function() {
@@ -155,5 +155,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('.servei-card, .feature, .gallery-item').forEach(el => {
         observer.observe(el);
+    });
+
+    document.querySelectorAll('.features-grid, .serveis-grid').forEach(container => {
+        const hint = container.parentElement.querySelector('.swipe-hint');
+        if (hint) {
+            container.addEventListener('scroll', function() {
+                if (this.scrollLeft > 20) {
+                    hint.style.opacity = '0';
+                    setTimeout(() => hint.style.display = 'none', 300);
+                }
+            }, { once: true });
+        }
     });
 });
