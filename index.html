@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Comptejardins - Serveis professionals de jardineria a Osona. Disseny de jardins, manteniment, poda, gespa i molt més.">
     <meta name="keywords" content="jardineria, Osona, Vic, jardins, poda, gespa, manteniment, disseny jardins">
-    <title>Comptejardins | Jardineria Professional a Osona</title>
+    <title>Compte Jardins | Jardineria Professional a Osona</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,11 +99,11 @@
                         <p>Més de 15 anys d'experiència</p>
                     </div>
                 </div>
-                <div class="swipe-hint">
-                    <span>Llisca per veure més</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
+                <div class="scroll-dots" aria-hidden="true">
+                    <span class="scroll-dot"></span>
+                    <span class="scroll-dot"></span>
+                    <span class="scroll-dot"></span>
+                    <span class="scroll-dot"></span>
                 </div>
             </div>
         </section>
@@ -190,11 +190,13 @@
                         <p>Neteja de finques, solars i jardins abandonats. Retirada de restes vegetals i deixalles amb maquinària professional.</p>
                     </div>
                 </div>
-                <div class="swipe-hint">
-                    <span>Llisca per veure més</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
+                <div class="scroll-dots" aria-hidden="true">
+                    <span class="scroll-dot"></span>
+                    <span class="scroll-dot"></span>
+                    <span class="scroll-dot"></span>
+                    <span class="scroll-dot"></span>
+                    <span class="scroll-dot"></span>
+                    <span class="scroll-dot"></span>
                 </div>
             </div>
         </section>
@@ -469,6 +471,12 @@
             </div>
         </div>
     </footer>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Tancar">&times;</button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -415,31 +415,31 @@ a {
     font-size: 1.1rem;
 }
 
-.swipe-hint {
+.scroll-dots {
     display: none;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
-    color: var(--color-text-light);
-    margin-top: 15px;
-    transition: opacity 0.3s ease;
+    gap: 6px;
+    margin-top: 20px;
 }
 
-.swipe-hint svg {
-    width: 20px;
-    height: 20px;
-    stroke: var(--color-text-light);
-    animation: swipeHint 1.5s ease-in-out infinite;
+.scroll-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-text-light);
+    opacity: 0.3;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-@keyframes swipeHint {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
+.scroll-dot.active {
+    opacity: 1;
+    background: var(--color-primary);
+    transform: scale(1.3);
 }
 
 @media (max-width: 768px) {
-    .swipe-hint {
+    .scroll-dots {
         display: flex;
     }
 }
@@ -1261,4 +1261,60 @@ a {
     .badge-number {
         font-size: 1.5rem;
     }
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 40px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-close:hover {
+    opacity: 1;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox-caption {
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+.slide img {
+    cursor: pointer;
 }

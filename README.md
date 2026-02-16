@@ -1,4 +1,4 @@
-# Comptejardins Web
+# Compte jardins Web
 
 Web de jardineria professional a Osona - [comptejardins.cat](https://comptejardins.cat)
 
