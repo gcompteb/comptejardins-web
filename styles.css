@@ -526,6 +526,10 @@ a {
     object-fit: cover;
 }
 
+.slide img.pos-top {
+    object-position: top center;
+}
+
 .slide-caption {
     position: absolute;
     bottom: 0;
