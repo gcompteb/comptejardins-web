@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    document.querySelectorAll('.features-grid, .serveis-grid').forEach(container => {
+    document.querySelectorAll('.features-grid, .serveis-grid, .zones-grid').forEach(container => {
         const dotsContainer = container.parentElement.querySelector('.scroll-dots');
         if (dotsContainer) {
             const dots = dotsContainer.querySelectorAll('.scroll-dot');
@@ -218,5 +218,58 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+    });
+
+    document.querySelectorAll('.comparador').forEach(comparador => {
+        const slider = comparador.querySelector('.slider-handle');
+        const imgDespres = comparador.querySelector('.img-despres');
+        const etiquetaAbans = comparador.querySelector('.etiqueta-abans');
+        const etiquetaDespres = comparador.querySelector('.etiqueta-despres');
+
+        const divider = document.createElement('div');
+        divider.className = 'comparador-divider';
+        divider.innerHTML = '<div class="comparador-handle-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/></svg></div>';
+        comparador.appendChild(divider);
+
+        const hint = document.createElement('div');
+        hint.className = 'comparador-hint';
+        hint.textContent = '↔ Arrossega per comparar';
+        comparador.appendChild(hint);
+
+        function updateComparador(value) {
+            imgDespres.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+            divider.style.left = `${value}%`;
+            etiquetaAbans.style.opacity = value > 60 ? '0' : '1';
+            etiquetaDespres.style.opacity = value < 40 ? '0' : '1';
+        }
+
+        function markInteracted() {
+            comparador.classList.add('interacted');
+        }
+
+        updateComparador(50);
+
+        slider.addEventListener('input', (e) => {
+            updateComparador(e.target.value);
+            markInteracted();
+        });
+
+        comparador.addEventListener('mousemove', (e) => {
+            const rect = comparador.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+            slider.value = Math.max(0, Math.min(100, percentage));
+            updateComparador(slider.value);
+            markInteracted();
+        });
+
+        comparador.addEventListener('touchmove', (e) => {
+            const rect = comparador.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+            slider.value = Math.max(0, Math.min(100, percentage));
+            updateComparador(slider.value);
+            markInteracted();
+        });
     });
 });
