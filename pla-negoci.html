@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pla de Negoci Digital — Compte Jardins</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #1a1a1a;
+            background: #fff;
+            font-size: 11pt;
+            line-height: 1.6;
+        }
+
+        /* PORTADA */
+        .portada {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 60px 70px;
+            background: #1e3a1e;
+            color: #fff;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portada::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .portada::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: 80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .portada-tag {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 9pt;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #7db87d;
+            margin-bottom: 30px;
+        }
+
+        .portada h1 {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 42pt;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .portada h1 span {
+            color: #7db87d;
+        }
+
+        .portada-subtitol {
+            font-size: 14pt;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+
+        .portada-dades {
+            display: flex;
+            gap: 50px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            width: 100%;
+        }
+
+        .portada-dada label {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 8pt;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #7db87d;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .portada-dada span {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 11pt;
+            color: #fff;
+        }
+
+        /* PÀGINES INTERIOR */
+        .pagina {
+            padding: 55px 70px;
+            page-break-after: always;
+            min-height: 100vh;
+        }
+
+        .pagina:last-child {
+            page-break-after: auto;
+        }
+
+        /* CAPÇALERA DE PÀGINA */
+        .cap-pagina {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #1e3a1e;
+        }
+
+        .cap-pagina-nom {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 8pt;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #1e3a1e;
+            font-weight: 700;
+        }
+
+        .cap-pagina-seccio {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 8pt;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        /* TÍTOLS DE SECCIÓ */
+        .seccio-tag {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 8pt;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #4a7c4a;
+            display: inline-block;
+            background: #edf5ed;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 22pt;
+            font-weight: 700;
+            color: #1e3a1e;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 12pt;
+            font-weight: 700;
+            color: #1e3a1e;
+            margin-bottom: 8px;
+            margin-top: 24px;
+            page-break-after: avoid;
+        }
+
+        h4 {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 10pt;
+            font-weight: 700;
+            color: #4a7c4a;
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* TAULA */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 10pt;
+        }
+
+        thead tr {
+            background: #1e3a1e;
+            color: #fff;
+        }
+
+        thead th {
+            padding: 10px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 9pt;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f5f9f5;
+        }
+
+        tbody td {
+            padding: 9px 16px;
+            color: #333;
+            border-bottom: 1px solid #e8f0e8;
+        }
+
+        tbody.amb-total tr:last-child td {
+            font-weight: 700;
+            color: #1e3a1e;
+            border-top: 2px solid #1e3a1e;
+            border-bottom: none;
+        }
+
+        /* CAIXES */
+        .caixa {
+            border-left: 4px solid #4a7c4a;
+            background: #f5f9f5;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .caixa-alerta {
+            border-left: 4px solid #c8892a;
+            background: #fdf6ec;
+        }
+
+        .caixa-destacat {
+            background: #1e3a1e;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+
+        .caixa-destacat p, .caixa-destacat h3 {
+            color: #fff;
+        }
+
+        .caixa-destacat h3 {
+            color: #7db87d;
+            margin-top: 0;
+        }
+
+        /* LLISTES */
+        ul {
+            padding-left: 20px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+        }
+
+        ul li strong {
+            color: #1e3a1e;
+        }
+
+        /* MES BADGE */
+        .mes-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 6px;
+        }
+
+        .mes-badge {
+            font-family: 'Helvetica Neue', sans-serif;
+            background: #1e3a1e;
+            color: #fff;
+            font-size: 9pt;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .timeline-mes {
+            font-family: 'Helvetica Neue', sans-serif;
+            background: #edf5ed;
+            color: #1e3a1e;
+            font-size: 9pt;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .timeline-text {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 10pt;
+            color: #333;
+            padding-top: 4px;
+        }
+
+        /* GRID 2 COL */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            border: 1px solid #d9e8d9;
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .card h4 {
+            margin-top: 0;
+        }
+
+        /* PIE DE PÀGINA */
+        .peu-pagina {
+            position: fixed;
+            bottom: 30px;
+            left: 70px;
+            right: 70px;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 8pt;
+            color: #aaa;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 10px;
+        }
+
+        /* PRINT */
+        @page { margin: 0; size: A4; }
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .portada { height: 100vh; }
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 24px 0;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .kpi {
+            text-align: center;
+            background: #f5f9f5;
+            border-radius: 10px;
+            padding: 20px 12px;
+            border: 1px solid #d9e8d9;
+        }
+
+        .kpi-num {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 24pt;
+            font-weight: 700;
+            color: #1e3a1e;
+            line-height: 1;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .kpi-label {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 8.5pt;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="portada">
+    <div class="portada-tag">Document estratègic</div>
+    <h1>Pla de<br>Negoci<br><span>Digital</span></h1>
+    <div class="portada-subtitol">Estratègia de posicionament i publicitat online</div>
+    <div class="portada-dades">
+        <div class="portada-dada">
+            <label>Empresa</label>
+            <span>Compte Jardins</span>
+        </div>
+        <div class="portada-dada">
+            <label>Durada</label>
+            <span>6 mesos</span>
+        </div>
+        <div class="portada-dada">
+            <label>Pressupost total</label>
+            <span>150 – 200 €/mes</span>
+        </div>
+        <div class="portada-dada">
+            <label>Zona</label>
+            <span>Osona i comarques</span>
+        </div>
+        <div class="portada-dada">
+            <label>Data</label>
+            <span>Febrer 2026</span>
+        </div>
+    </div>
+</div>
+
+<!-- PÀGINA 1: CONTEXT I PRESSUPOST -->
+<div class="pagina">
+    <div class="cap-pagina">
+        <div class="cap-pagina-nom">Compte Jardins</div>
+        <div class="cap-pagina-seccio">Pla de Negoci Digital · 2026</div>
+    </div>
+
+    <div class="seccio-tag">Punt de partida</div>
+    <h2>Context del negoci</h2>
+
+    <p>Compte Jardins és una empresa de jardineria professional que arrenca la seva activitat digital a principis de 2026. El negoci es troba en fase de despegament: el propietari compagina amb la seva anterior activitat laboral i acaba d'incorporar el primer treballador en pràctiques.</p>
+
+    <p>Aquesta circumstància és clau per al disseny del pla: <strong>la generació de contactes ha de créixer de forma progressiva</strong>, en paral·lel amb la capacitat operativa del negoci.</p>
+
+    <div class="caixa caixa-alerta">
+        <h4 style="color:#c8892a; margin-top:0;">Servei estrella a potenciar</h4>
+        <p><strong>Poda en alçada amb cordes i tala d'arbres.</strong> És on hi ha més marge econòmic i on el propietari té més expertesa i demanda creixent. Tota la comunicació digital girarà al voltant d'aquest servei.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="seccio-tag">Economia del pla</div>
+    <h2>Distribució del pressupost</h2>
+
+    <p>El pressupost total inclou tant la inversió en publicitat com la gestió tècnica de les campanyes. La inversió publicitària es concentra inicialment a Google Ads per maximitzar el retorn amb un sol canal ben treballat.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Concepte</th>
+                <th>Cost mensual</th>
+                <th>Observacions</th>
+            </tr>
+        </thead>
+        <tbody class="amb-total">
+            <tr>
+                <td>Gestió digital (configuració + seguiment + optimització)</td>
+                <td>40 – 50 €</td>
+                <td>Preu mòdic acordat entre les parts</td>
+            </tr>
+            <tr>
+                <td>Google Ads — Poda en alçada i tala (50%)</td>
+                <td>50 – 75 €</td>
+                <td>Servei estrella, marge alt</td>
+            </tr>
+            <tr>
+                <td>Google Ads — Disseny de jardins (25%)</td>
+                <td>25 – 35 €</td>
+                <td>Projectes de tiquet alt</td>
+            </tr>
+            <tr>
+                <td>Google Ads — Manteniment de jardins (25%)</td>
+                <td>25 – 35 €</td>
+                <td>Recurrència i estabilitat</td>
+            </tr>
+            <tr>
+                <td><strong>Total mensual</strong></td>
+                <td><strong>150 – 200 €</strong></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="kpi-grid">
+        <div class="kpi">
+            <span class="kpi-num">150€</span>
+            <div class="kpi-label">Pressupost mínim<br>mensual</div>
+        </div>
+        <div class="kpi">
+            <span class="kpi-num">6</span>
+            <div class="kpi-label">Mesos de<br>durada del pla</div>
+        </div>
+        <div class="kpi">
+            <span class="kpi-num">850–1.100€</span>
+            <div class="kpi-label">Inversió total<br>estimada (6 mesos)</div>
+        </div>
+    </div>
+</div>
+
+<!-- PÀGINA 2: MES 1 -->
+<div class="pagina">
+    <div class="cap-pagina">
+        <div class="cap-pagina-nom">Compte Jardins</div>
+        <div class="cap-pagina-seccio">Pla de Negoci Digital · 2026</div>
+    </div>
+
+    <div class="seccio-tag">Fase 1</div>
+    <div class="mes-header">
+        <div class="mes-badge">MES 1</div>
+        <h2>Fonaments digitals</h2>
+    </div>
+    <p style="color:#666; margin-bottom:14px;">Abans d'invertir en publicitat, cal tenir la base ben posada. Gastar en anuncis sense fonaments és malgastar el pressupost. <strong style="color:#1e3a1e;">Aquest mes només es paga la gestió (40–50 €), sense inversió publicitària.</strong></p>
+
+    <div class="caixa caixa-alerta" style="margin-top:0; margin-bottom:20px;">
+        <h4 style="color:#c8892a; margin-top:0;">Timing favorable</h4>
+        <p style="margin-bottom:0;">La poda i tala d'arbres tenen <strong>temporada alta entre finals d'hivern i primavera</strong>. Arrencar el pla al febrer-març significa que les campanyes de Google Ads estaran actives just quan la demanda és més alta.</p>
+    </div>
+
+    <h3>Google Business Profile (Google Maps)</h3>
+    <p>És el generador de contactes locals més efectiu i <strong>és gratuït</strong>. Moltes persones busquen un jardiner directament a Google Maps.</p>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>Configuració del perfil</h4>
+            <ul>
+                <li>Crear o reclamar la fitxa verificada</li>
+                <li>Categoria: <em>Jardinero</em> + <em>Servicio de tala de árboles</em></li>
+                <li>Zona de servei: Osona, Vallès Oriental, La Selva, El Gironès, La Garrotxa</li>
+                <li>Horari, telèfon i web actualitzats</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Contingut del perfil</h4>
+            <ul>
+                <li>Descripció amb paraules clau: <em>"poda en alçada Osona"</em>, <em>"tala arbres Vic"</em></li>
+                <li>Fotos de treballs d'alçada, tala i resultats finals</li>
+                <li>Publicar actualitzacions setmanals (fotos de feines)</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <h3>SEO On-page (a la web)</h3>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>Contingut i paraules clau</h4>
+            <ul>
+                <li>Secció específica: <em>"Poda en Alçada i Tala d'Arbres"</em></li>
+                <li>Meta títols locals: <em>"Poda en alçada Osona · Tala amb cordes"</em></li>
+                <li>Mencionar municipis de la zona al text</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Aspectes tècnics</h4>
+            <ul>
+                <li>Optimitzar noms d'imatges: <em>tala-arbres-vic.jpg</em></li>
+                <li>Configurar Google Search Console</li>
+                <li>Configurar Google Analytics 4</li>
+                <li>Verificar velocitat i versió mòbil</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <h3>Seguiment de conversions (imprescindible)</h3>
+    <p>Sense un sistema de seguiment, és impossible saber quines campanyes i paraules clau generen contactes reals. Cal configurar-ho <strong>abans</strong> de llançar qualsevol campanya de pagament.</p>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>Què mesurar</h4>
+            <ul>
+                <li>Trucades des de la web i des dels anuncis (Google Ads call tracking)</li>
+                <li>Enviaments del formulari de contacte</li>
+                <li>Clics al botó de WhatsApp</li>
+                <li>Clics al botó de trucada al mòbil</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Com fer-ho</h4>
+            <ul>
+                <li>Google Analytics 4: esdeveniments de conversió per cada acció de contacte</li>
+                <li>Google Ads: importar conversions de GA4 per optimitzar les campanyes automàticament</li>
+                <li>Google Tag Manager: centralitzar tots els seguiments sense tocar el codi constantment</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="caixa caixa-alerta">
+        <h4 style="color:#c8892a; margin-top:0;">Per què és tan important?</h4>
+        <p style="margin-bottom:0;">Amb 100–150 € de pressupost, cada euro compta. Si no sabem que la paraula <em>"tala arbres Osona"</em> genera 3 trucades i <em>"jardiner Vic"</em> genera 0, estem gastant a cegues. El seguiment permet redirigir el pressupost cap al que funciona de veritat.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="caixa caixa-destacat">
+        <h3>Estratègia de ressenyes (prioritat màxima)</h3>
+        <p>Per a una empresa nova, <strong>les ressenyes a Google Maps ho són tot.</strong> Fins i tot 5–8 ressenyes reals superen molts competidors locals que en tenen 0 o 1. Cal demanar-les activament a cada client content, just en acabar la feina, i compartir l'enllaç directe per facilitar-ho.</p>
+    </div>
+</div>
+
+<!-- PÀGINA 3: MES 2-3 GOOGLE ADS -->
+<div class="pagina">
+    <div class="cap-pagina">
+        <div class="cap-pagina-nom">Compte Jardins</div>
+        <div class="cap-pagina-seccio">Pla de Negoci Digital · 2026</div>
+    </div>
+
+    <div class="seccio-tag">Fase 2</div>
+    <div class="mes-header">
+        <div class="mes-badge">MES 2 – 3</div>
+        <h2>Google Ads · Cerca directa</h2>
+    </div>
+    <p style="color:#666; margin-bottom:24px;">Google Ads captura gent que ja busca el servei en aquest moment. A Osona i comarques, la competència digital és baixa → cost per clic accessible i consultes de qualitat alta.</p>
+
+    <h3>3 línies de campanya</h3>
+    <p>El pressupost es reparteix en tres línies de servei per cobrir demanda immediata, projectes d'alt valor i recurrència:</p>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>Línia 1 · Poda en alçada i tala (50%)</h4>
+            <p style="font-size:9pt; color:#666; margin-bottom:8px;">Servei estrella · 50–75 €/mes</p>
+            <ul>
+                <li><em>tala arbres Osona</em></li>
+                <li><em>poda en alçada Vic</em></li>
+                <li><em>tallar arbre gran Vic</em></li>
+                <li><em>poda amb cordes Osona</em></li>
+                <li><em>treure arbre jardí Manlleu</em></li>
+                <li><em>poda arbres difícil accés</em></li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Línia 2 · Disseny de jardins (25%)</h4>
+            <p style="font-size:9pt; color:#666; margin-bottom:8px;">Projectes de tiquet alt · 25–35 €/mes</p>
+            <ul>
+                <li><em>disseny jardí Osona</em></li>
+                <li><em>gespa artificial Vic</em></li>
+                <li><em>paisatgista Osona</em></li>
+                <li><em>fer jardí nou Manlleu</em></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+        <h4>Línia 3 · Manteniment de jardins (25%)</h4>
+        <p style="font-size:9pt; color:#666; margin-bottom:8px;">Recurrència i estabilitat · 25–35 €/mes</p>
+        <ul style="columns:2;">
+            <li><em>manteniment jardí Osona</em></li>
+            <li><em>jardiner manteniment Vic</em></li>
+            <li><em>neteja jardí Manlleu</em></li>
+            <li><em>cura jardí Granollers</em></li>
+        </ul>
+        <p style="font-size:9pt; color:#666; margin-top:8px;">El manteniment genera contractes mensuals recurrents i dona estabilitat de caixa. A més, els clients de manteniment sovint necessiten poda o disseny més endavant.</p>
+    </div>
+
+    <h3>Configuració tècnica important</h3>
+    <ul>
+        <li><strong>Concordança de paraules clau:</strong> Usar concordança de frase i exacta. <strong>Mai concordança àmplia</strong> amb pressupost reduït → malgasta els diners en cerques irrelevants.</li>
+        <li><strong>Idioma:</strong> Anuncis en català i castellà (a Osona es busca en tots dos).</li>
+        <li><strong>Geolocalització:</strong> 30–40 km des de Vic + cobertura Vallès Oriental i La Selva.</li>
+    </ul>
+
+    <h3>Landing pages específiques per línia</h3>
+    <p>Cada línia de campanya ha de portar a una <strong>pàgina de destí dedicada</strong>, no a la pàgina d'inici genèrica. Una persona que busca <em>"tala arbres Osona"</em> ha d'arribar a una pàgina que parli exclusivament de tala i poda en alçada, amb fotos d'aquests treballs i un formulari/botó de trucada ben visible.</p>
+    <div class="grid-2">
+        <div class="card">
+            <h4>Per què?</h4>
+            <ul>
+                <li>Millora la taxa de conversió (el visitant veu exactament el que busca)</li>
+                <li>Millora el Quality Score de Google Ads → CPC més baix</li>
+                <li>Permet mesurar quina línia converteix millor</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Pàgines a crear</h4>
+            <ul>
+                <li><strong>Poda en alçada i tala:</strong> fotos d'arboricultura, explicació del servei, CTA directe</li>
+                <li><strong>Disseny de jardins:</strong> exemples de projectes, galeria abans/després</li>
+                <li><strong>Manteniment:</strong> serveis inclosos, periodicitat, tarifes orientatives</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>WhatsApp com a canal de conversió</h3>
+    <p>A més del formulari i el telèfon, <strong>WhatsApp és un canal de contacte clau</strong> per al públic objectiu. Molta gent prefereix escriure un WhatsApp que trucar o omplir un formulari. Cal assegurar que totes les landing pages i la web principal incloguin un botó de WhatsApp ben visible, i que els anuncis de Google Ads puguin incloure l'extensió de missatge.</p>
+
+    <h3>Pressupost i expectatives</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Mes</th>
+                <th>Inversió Google Ads</th>
+                <th>Consultes estimades</th>
+                <th>Objectiu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Mes 2</td>
+                <td>100 – 150 €</td>
+                <td>5 – 15 consultes</td>
+                <td>Aprendre quines línies i paraules converteixen</td>
+            </tr>
+            <tr>
+                <td>Mes 3</td>
+                <td>100 – 150 €</td>
+                <td>10 – 20 consultes</td>
+                <td>Optimitzar repartiment entre les 3 línies</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="caixa">
+        <h4 style="margin-top:0;">Nota sobre les estimacions</h4>
+        <p style="margin-bottom:0;">Les xifres són conservadores. El volum real dependrà del cost per clic (CPC) de la zona, que pot variar entre 0,50 € i 2 € per a cerques de jardineria local. Amb la competència digital baixa a Osona, és probable que el CPC estigui a la banda baixa, però cal verificar-ho les primeres setmanes i ajustar expectatives. El seguiment de conversions permetrà saber el cost real per cada contacte.</p>
+    </div>
+</div>
+
+<!-- PÀGINA 4: MES 3-4 REPUTACIÓ + MES 4-5 META ADS -->
+<div class="pagina">
+    <div class="cap-pagina">
+        <div class="cap-pagina-nom">Compte Jardins</div>
+        <div class="cap-pagina-seccio">Pla de Negoci Digital · 2026</div>
+    </div>
+
+    <div class="seccio-tag">Fase 3</div>
+    <div class="mes-header">
+        <div class="mes-badge">MES 3 – 4</div>
+        <h2>Reputació i directoris</h2>
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>Directoris locals (gratuït)</h4>
+            <ul>
+                <li>Páginas Amarillas</li>
+                <li>Habitissimo</li>
+                <li>Houzz</li>
+                <li>Trustpilot</li>
+            </ul>
+            <p style="font-size:9pt; color:#666; margin-top:8px;">Important: el nom, adreça i telèfon han de ser exactament iguals a tots els directoris.</p>
+        </div>
+        <div class="card">
+            <h4>Acumulació de ressenyes</h4>
+            <p>Continuar demanant ressenyes a Google Maps. L'objectiu als 4 mesos és tenir un mínim de <strong>10 ressenyes reals</strong> amb valoració > 4,5 ⭐</p>
+            <p style="font-size:9pt; color:#666; margin-top:8px;">Respondre sempre totes les ressenyes.</p>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <h3>Instagram orgànic (gratuït i estratègic)</h3>
+    <p>Sense gastar ni un euro, Instagram pot ser un canal molt potent per a un negoci com Compte Jardins. El contingut de jardineria i especialment de <strong>poda en alçada és molt visual i genera curiositat</strong>. No cal publicar cada dia, però sí amb regularitat.</p>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>Tipus de contingut</h4>
+            <ul>
+                <li><strong>Reels curts (15-30s):</strong> poda amb cordes, tala d'arbres, abans/després. Tenen potencial de viralitzar-se</li>
+                <li><strong>Fotos de treballs acabats:</strong> jardins transformats, gespa instal·lada</li>
+                <li><strong>Stories del dia a dia:</strong> arribar a la feina, preparar eines, resultat final</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Freqüència i hashtags</h4>
+            <ul>
+                <li>Mínim 2-3 publicacions per setmana</li>
+                <li>Hashtags locals: <em>#jardineria #osona #vic #jardinervic #podaenalçada #arboricultura</em></li>
+                <li>Etiquetar ubicació a cada publicació</li>
+                <li>Respondre tots els comentaris i missatges directes</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="caixa">
+        <h4 style="margin-top:0;">Per què Instagram orgànic abans de Meta Ads?</h4>
+        <p style="margin-bottom:0;">Un perfil amb contingut real i seguidors locals genera <strong>confiança</strong> quan un client potencial investiga l'empresa. A més, el contingut orgànic que funciona bé es pot reutilitzar com a anunci de pagament a Meta Ads més endavant, ja sabent què agrada al públic.</p>
+    </div>
+
+    <hr class="divider" style="page-break-after: always;">
+
+    <div class="seccio-tag">Fase 4</div>
+    <div class="mes-header">
+        <div class="mes-badge">MES 4 – 5</div>
+        <h2>Meta Ads · Valoració segons resultats</h2>
+    </div>
+    <p style="color:#666; margin-bottom:14px;">Un cop Google Ads porta 2–3 mesos actiu i genera dades reals, s'avalua si incorporar Meta Ads (Facebook + Instagram) com a segon canal. La decisió depèn dels resultats obtinguts i de la capacitat operativa del negoci.</p>
+
+    <div class="caixa">
+        <h4 style="margin-top:0;">Condicions per activar Meta</h4>
+        <ul style="margin-bottom:0;">
+            <li>Google Ads genera consultes de forma regular</li>
+            <li>Es disposa de material visual (vídeos de poda en alçada, fotos abans/després)</li>
+            <li>El negoci pot absorbir més consultes (capacitat operativa suficient)</li>
+        </ul>
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>Anunci 1 · Treballs en alçada</h4>
+            <p>Vídeo curt (15–30s) o foto de poda amb cordes en acció. Molt diferenciador i genera curiositat.</p>
+            <p style="font-size:9pt; color:#666; font-style:italic; margin-top:8px;">"Arribes on altres jardiners no poden. Poda professional en alçada a Osona."</p>
+        </div>
+        <div class="card">
+            <h4>Anunci 2 · Abans i Després</h4>
+            <p>Carousel amb les fotos de transformació (gespa, olivera). Ja es té el material fet a la web.</p>
+            <p style="font-size:9pt; color:#666; font-style:italic; margin-top:8px;">"Mira la diferència. Et fem un pressupost sense compromís."</p>
+        </div>
+    </div>
+
+    <h3>Segmentació recomanada</h3>
+    <ul>
+        <li><strong>Edat:</strong> 35 – 65 anys</li>
+        <li><strong>Ubicació:</strong> Osona + 20 km + Vallès Oriental + La Selva + El Gironès + La Garrotxa</li>
+        <li><strong>Interessos:</strong> jardí, casa amb jardí, bricolatge, propietat rural, agricultura, vida al camp</li>
+        <li><strong>Enfocament:</strong> dirigit a propietaris de cases, masies i finques</li>
+    </ul>
+</div>
+
+<!-- PÀGINA 5: MES 5-6 I RESUM -->
+<div class="pagina">
+    <div class="cap-pagina">
+        <div class="cap-pagina-nom">Compte Jardins</div>
+        <div class="cap-pagina-seccio">Pla de Negoci Digital · 2026</div>
+    </div>
+
+    <div class="seccio-tag">Fase 5</div>
+    <div class="mes-header">
+        <div class="mes-badge">MES 5 – 6</div>
+        <h2>Optimització i escala</h2>
+    </div>
+
+    <p>Un cop les campanyes porten 3–4 mesos actives, es disposa de dades reals per prendre decisions informades.</p>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>Google Ads</h4>
+            <ul>
+                <li>Identificar quines línies i paraules clau generen contactes reals</li>
+                <li>Eliminar les que consumeixen pressupost sense convertir</li>
+                <li>Reequilibrar el repartiment entre les 3 línies segons resultats</li>
+                <li>Testar nous anuncis si els actuals s'esgoten</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Meta Ads (si s'ha activat)</h4>
+            <ul>
+                <li>Aturar l'anunci amb menys clics i interaccions</li>
+                <li>Duplicar el que millor funciona amb lleugers canvis</li>
+                <li>Activar retargeting: impactar els que han visitat la web però no han contactat</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="seccio-tag">Visió global</div>
+    <h2>Resum del pla per mesos</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-mes">Mes 1</div>
+            <div class="timeline-text">Google Business Profile, SEO on-page, seguiment de conversions, Search Console i Analytics. Sense inversió en anuncis.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-mes">Mes 2</div>
+            <div class="timeline-text">Llançament Google Ads amb 3 landing pages dedicades. Activar WhatsApp com a canal de conversió.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-mes">Mes 3</div>
+            <div class="timeline-text">Optimització Google Ads. Directoris locals. Ressenyes (objectiu: 10+). Inici Instagram orgànic.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-mes">Mes 4</div>
+            <div class="timeline-text">Revisió de resultats amb dades de conversió reals. Valorar Meta Ads segons capacitat i dades.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-mes">Mes 5</div>
+            <div class="timeline-text">Optimització profunda. Reequilibrar pressupost entre línies. Meta Ads si escau.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-mes">Mes 6</div>
+            <div class="timeline-text">Balanç dels 6 mesos. Presentació de resultats. Pla per a l'any següent.</div>
+        </div>
+    </div>
+
+    <hr class="divider" style="page-break-after: always;">
+
+    <h2>Expectatives realistes</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Mes</th>
+                <th>Objectiu</th>
+                <th>Consultes estimades</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Base tècnica llesta, fitxa Google activa</td>
+                <td>Consultes orgàniques (sense inversió)</td>
+            </tr>
+            <tr>
+                <td>2 – 3</td>
+                <td>Primeres consultes via Google Ads (3 línies)</td>
+                <td>5 – 20 / mes</td>
+            </tr>
+            <tr>
+                <td>3 – 4</td>
+                <td>Ressenyes + directoris + Instagram orgànic. Valorar Meta Ads</td>
+                <td>10 – 25 / mes</td>
+            </tr>
+            <tr>
+                <td>5 – 6</td>
+                <td>Flux estable, 2–4 projectes nous/mes</td>
+                <td>15 – 30 / mes</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="caixa caixa-destacat" style="margin-top:24px;">
+        <h3>Retorn de la inversió</h3>
+        <p>Amb una inversió total de 850–1.100 € en 6 mesos, <strong>2–3 projectes de poda en alçada o tala tancats</strong> ja amortitzen completament el pla. A partir d'aquí, tot és benefici net i base de clients recurrents.</p>
+    </div>
+</div>
+
+</body>
+</html>

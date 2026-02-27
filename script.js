@@ -91,6 +91,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'click_telefon',
+                'link_url': link.href
+            });
+        });
+    });
+
+    document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+        link.addEventListener('click', () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'click_whatsapp',
+                'link_url': link.href
+            });
+        });
+    });
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -127,6 +147,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 if (response.ok) {
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({
+                        'event': 'form_submit',
+                        'form_name': 'contacte'
+                    });
                     contactForm.style.display = 'none';
                     formSuccess.classList.add('show');
                 } else {
