@@ -98,6 +98,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 'event': 'click_telefon',
                 'link_url': link.href
             });
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {'send_to': 'AW-17981310788/knluCMX1l4AcEMSOlP5C'});
+            }
         });
     });
 
@@ -108,6 +111,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 'event': 'click_whatsapp',
                 'link_url': link.href
             });
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {'send_to': 'AW-17981310788/knluCMX1l4AcEMSOlP5C'});
+            }
         });
     });
 
@@ -152,6 +158,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         'event': 'form_submit',
                         'form_name': 'contacte'
                     });
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'conversion', {'send_to': 'AW-17981310788/knluCMX1l4AcEMSOlP5C'});
+                    }
                     contactForm.style.display = 'none';
                     formSuccess.classList.add('show');
                 } else {
